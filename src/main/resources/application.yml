@@ -1,5 +1,5 @@
 server:
-  port: 40612
+  port: 40617
 
 spring:
   devtools:

@@ -14,10 +14,10 @@ import org.springframework.context.annotation.ImportResource;
 public class Config {
 
     @Bean
-    @ConfigurationProperties(prefix = "liumapp.module.core")
-    public CoreParams coreParams(){
-        CoreParams coreParams = new CoreParams();
-        return coreParams;
+    @ConfigurationProperties(prefix = "liumapp.schedule")
+    public ScheduleParams coreParams(){
+        ScheduleParams scheduleParams = new ScheduleParams();
+        return scheduleParams;
     }
 
 }
