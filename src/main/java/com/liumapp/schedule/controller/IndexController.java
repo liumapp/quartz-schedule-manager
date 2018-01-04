@@ -1,9 +1,7 @@
 package com.liumapp.schedule.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.liumapp.schedule.config.QuartzManager;
 import com.liumapp.schedule.response.ResponseMessage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/")
 public class IndexController {
 
-    @Autowired
-    QuartzManager quartzManager;
 
     @RequestMapping(value = {"/", "/index"})
     @ResponseBody
