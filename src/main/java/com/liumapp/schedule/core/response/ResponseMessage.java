@@ -1,4 +1,4 @@
-package com.liumapp.schedule.response;
+package com.liumapp.schedule.core.response;
 
 
 import org.springframework.stereotype.Component;

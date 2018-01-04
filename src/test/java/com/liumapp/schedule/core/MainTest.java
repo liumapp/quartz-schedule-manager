@@ -1,8 +1,7 @@
-package com.liumapp.schedule;
+package com.liumapp.schedule.core;
 
 import com.liumapp.schedule.config.QuartzManager;
-import com.liumapp.schedule.jobs.HelloJob;
-import org.junit.Ignore;
+import com.liumapp.schedule.core.jobs.HelloJob;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

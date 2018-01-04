@@ -1,6 +1,6 @@
-package com.liumapp.schedule.service.impl;
+package com.liumapp.schedule.core.service.impl;
 
-import com.liumapp.schedule.service.HelloService;
+import com.liumapp.schedule.core.service.HelloService;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

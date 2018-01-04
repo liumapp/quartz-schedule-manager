@@ -1,4 +1,4 @@
-package com.liumapp.schedule.service;
+package com.liumapp.schedule.core.service;
 
 import java.util.Map;
 

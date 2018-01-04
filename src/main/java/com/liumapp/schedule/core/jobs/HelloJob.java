@@ -1,6 +1,6 @@
-package com.liumapp.schedule.jobs;
+package com.liumapp.schedule.core.jobs;
 
-import com.liumapp.schedule.service.HelloService;
+import com.liumapp.schedule.core.service.HelloService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -18,14 +18,11 @@ import java.util.Map;
 @Component
 public class HelloJob implements Job {
 
-
     @Autowired
     HelloService helloService;
 
-
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
         String jobName = jobExecutionContext.getJobDetail().getKey().getName();
         System.out.println("jobName =" + jobName);
         Map<String, Object> parameter = jobExecutionContext.getMergedJobDataMap();
