@@ -2,6 +2,9 @@ package com.liumapp.schedule.core.config;
 
 import com.liumapp.DNSQueen.worker.process.WokerEar;
 import com.liumapp.DNSQueen.worker.tcp.TCPSocketMonitor;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +38,12 @@ public class Config {
         WokerEar wokerEar = new WokerEar();
         wokerEar.setStartDelay(startDelay);
         return wokerEar;
+    }
+
+    @Bean
+    public Scheduler scheduler () throws SchedulerException {
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        return scheduler;
     }
 
 }

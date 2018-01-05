@@ -1,10 +1,10 @@
 package com.liumapp.schedule.core.worker;
 
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
-import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
-import com.liumapp.pattern.exception.WrongType;
-import com.liumapp.pattern.schedule.HelloPattern;
 import com.liumapp.pattern.schedule.core.SwitchPattern;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
  * home-page:http://www.liumapp.com
  */
 @Component
-public class SwitchWorker extends StandReadyWorker{
+public class SwitchWorker extends StandReadyWorker {
+
+    @Autowired
+    private Scheduler scheduler;
 
     @Override
     public String doWhatYouShouldDo(String s) {
@@ -21,24 +24,47 @@ public class SwitchWorker extends StandReadyWorker{
             SwitchPattern switchPattern = SwitchPattern.parse(s);
             switch (switchPattern.getOrder()) {
                 case CLOSED:
-                    break;
+                    return closed();
                 case RESTART:
-                    break;
+                    return restart();
                 case START:
-
-                    break;
+                    return start();
                 default:
+                    return "wrong order type";
             }
-            return "success";
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private String start () throws SchedulerException {
+        if (!scheduler.isStarted()) {
+            scheduler.start();
+            return "start success";
+        } else {
+            return "already started ...";
+        }
 
     }
 
-    private void start () {
-        
+    private String closed () throws SchedulerException {
+        if(!scheduler.isShutdown()) {
+            scheduler.shutdown();
+            return "shutdown success";
+        } else {
+            return "already closed ...";
+        }
+    }
+
+    private String restart () throws SchedulerException {
+        if (!scheduler.isStarted()) {
+            scheduler.start();
+        } else {
+            scheduler.shutdown();
+            scheduler.start();
+        }
+        return "restart success";
     }
 
 }
