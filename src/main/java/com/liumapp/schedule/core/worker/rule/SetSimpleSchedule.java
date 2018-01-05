@@ -13,12 +13,33 @@ import org.quartz.Trigger;
  */
 public interface SetSimpleSchedule<T extends Pattern , J extends JobDetail , G extends SimpleTrigger> {
 
+    /**
+     * make name and group name for job and trigger
+     * @param pattern your socket pattern
+     * @return Pattern
+     */
     public Pattern makeParams (T pattern) ;
 
+    /**
+     * make your job
+     * @param pattern your socket pattern
+     * @return JobDetail
+     */
     public JobDetail makeJob (T pattern) ;
 
+    /**
+     * make your trigger
+     * @param pattern your socket pattern
+     * @return SimpleTrigger
+     */
     public SimpleTrigger makeTrigger (T pattern) ;
 
+    /**
+     * make your job and trigger together
+     * @param job your job
+     * @param trigger your trigger
+     * @throws SchedulerException something error?
+     */
     public void putSchedule ( J job , G trigger ) throws SchedulerException;
 
 }

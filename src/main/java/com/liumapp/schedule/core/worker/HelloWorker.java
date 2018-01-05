@@ -47,6 +47,7 @@ public class HelloWorker extends StandReadyWorker implements SetSimpleSchedule {
         HelloPattern helloPattern = (HelloPattern) pattern;
         helloPattern.setGroup(workerTool.generateGroup());
         helloPattern.setName(workerTool.generateName());
+        helloPattern.setTriggerName("trigger" + helloPattern.getName());
         return helloPattern;
     }
 
@@ -63,7 +64,7 @@ public class HelloWorker extends StandReadyWorker implements SetSimpleSchedule {
     public SimpleTrigger makeTrigger(Pattern pattern) {
         HelloPattern helloPattern = (HelloPattern) pattern;
         SimpleTrigger trigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                .withIdentity(helloPattern.getName() , helloPattern.getGroup())
+                .withIdentity(helloPattern.getTriggerName() , helloPattern.getGroup())
                 .startAt(DateBuilder.futureDate(helloPattern.getTime() , DateBuilder.IntervalUnit.valueOf(String.valueOf(helloPattern.getUnit()))))
                 .forJob(helloPattern.getName() , helloPattern.getGroup())
                 .build();
