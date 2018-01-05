@@ -3,9 +3,11 @@ package com.liumapp.schedule.core.worker;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import com.liumapp.pattern.Pattern;
 import com.liumapp.pattern.schedule.HelloPattern;
-import com.liumapp.schedule.core.worker.rule.SetSchedule;
+import com.liumapp.schedule.core.worker.rule.SetSimpleSchedule;
 import com.liumapp.schedule.core.worker.tool.WorkerTool;
+import org.quartz.JobDetail;
 import org.quartz.Scheduler;
+import org.quartz.SimpleTrigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
  * home-page:http://www.liumapp.com
  */
 @Component
-public class HelloWorker extends StandReadyWorker implements SetSchedule {
+public class HelloWorker extends StandReadyWorker implements SetSimpleSchedule {
 
     @Autowired
     private Scheduler scheduler;
@@ -32,10 +34,10 @@ public class HelloWorker extends StandReadyWorker implements SetSchedule {
 
             if (!scheduler.isStarted()) return " plz start scheduler first . ";
 
-            helloPattern.setGroup(workerTool.generateGroup());
-            helloPattern.setName(workerTool.generateName());
-            makeParams(helloPattern);
-
+            helloPattern = (HelloPattern) makeParams(helloPattern);
+            JobDetail job = makeJob(helloPattern);
+            SimpleTrigger trigger = makeTrigger(helloPattern);
+            putSchedule(helloPattern , job , trigger);
 
             return "success";
         } catch (Exception e) {
@@ -46,24 +48,26 @@ public class HelloWorker extends StandReadyWorker implements SetSchedule {
 
 
     @Override
-    public <T extends Pattern> void makeParams(T pattern) {
+    public Pattern makeParams(Pattern pattern) {
         HelloPattern helloPattern = (HelloPattern) pattern;
         helloPattern.setGroup(workerTool.generateGroup());
         helloPattern.setName(workerTool.generateName());
+        return helloPattern;
     }
 
     @Override
-    public <T extends Pattern> void makeJob(T pattern) {
-        
+    public JobDetail makeJob(Pattern pattern) {
+        return null;
     }
 
     @Override
-    public <T extends Pattern> void makeTrigger(T pattern) {
-
+    public SimpleTrigger makeTrigger(Pattern pattern) {
+        return null;
     }
 
     @Override
-    public <T extends Pattern> void putSchedule(T pattern) {
+    public void putSchedule(Pattern pattern, JobDetail job, SimpleTrigger trigger) {
 
     }
+
 }
