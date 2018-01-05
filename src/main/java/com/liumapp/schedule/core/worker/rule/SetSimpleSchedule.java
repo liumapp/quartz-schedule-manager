@@ -2,6 +2,7 @@ package com.liumapp.schedule.core.worker.rule;
 
 import com.liumapp.pattern.Pattern;
 import org.quartz.JobDetail;
+import org.quartz.SchedulerException;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 
@@ -18,6 +19,6 @@ public interface SetSimpleSchedule<T extends Pattern , J extends JobDetail , G e
 
     public SimpleTrigger makeTrigger (T pattern) ;
 
-    public void putSchedule (T pattern , J job , G trigger );
+    public void putSchedule ( J job , G trigger ) throws SchedulerException;
 
 }
