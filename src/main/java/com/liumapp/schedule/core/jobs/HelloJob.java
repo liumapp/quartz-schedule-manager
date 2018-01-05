@@ -1,9 +1,7 @@
 package com.liumapp.schedule.core.jobs;
 
 import com.liumapp.schedule.core.service.HelloService;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +19,21 @@ public class HelloJob implements Job {
     @Autowired
     HelloService helloService;
 
+    private String Msg;
+
+    public HelloJob() {
+    }
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        String jobName = jobExecutionContext.getJobDetail().getKey().getName();
-        System.out.println("jobName =" + jobName);
-        Map<String, Object> parameter = jobExecutionContext.getMergedJobDataMap();
-        System.out.println("Job execute result :" + helloService.sayHello(parameter));
-        System.out.println(new Date() + ": doing other things..." + Thread.currentThread().getId());
+        JobKey key = jobExecutionContext.getJobDetail().getKey();
+
+        JobDataMap dataMap = jobExecutionContext.getMergedJobDataMap();
+
+        System.out.println(" Msg is : " + this.Msg);
+    }
+
+    public void setMsg(String msg) {
+        Msg = msg;
     }
 }

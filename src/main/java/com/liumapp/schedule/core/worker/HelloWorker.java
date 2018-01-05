@@ -56,6 +56,7 @@ public class HelloWorker extends StandReadyWorker implements SetSimpleSchedule {
         HelloPattern helloPattern = (HelloPattern) pattern;
         JobDetail job = JobBuilder.newJob(HelloJob.class)
                 .withIdentity(helloPattern.getName() , helloPattern.getGroup())
+                .usingJobData("Msg" , helloPattern.getMsg())
                 .build();
         return job;
     }

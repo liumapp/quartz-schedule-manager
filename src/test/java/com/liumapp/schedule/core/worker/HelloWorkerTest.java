@@ -2,6 +2,7 @@ package com.liumapp.schedule.core.worker;
 
 import com.liumapp.DNSQueen.queen.Queen;
 import com.liumapp.pattern.schedule.HelloPattern;
+import com.liumapp.pattern.schedule.SchedulePattern;
 import com.liumapp.pattern.schedule.core.SwitchPattern;
 import com.liumapp.schedule.core.Main;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class HelloWorkerTest {
         queen.setPort(40218);
         queen.connect();
         HelloPattern helloPattern = new HelloPattern();
-        helloPattern.setImportant("hello liumapp" , 30 , HelloPattern.IntervalUnit.SECOND);
+        helloPattern.setImportant("hello lm" , 10 , HelloPattern.IntervalUnit.SECOND);
         if (helloPattern.chk()) {
             queen.say(helloPattern.getEncoding());
             System.out.println(queen.hear());
