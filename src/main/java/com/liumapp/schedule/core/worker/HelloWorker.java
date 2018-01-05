@@ -1,6 +1,7 @@
 package com.liumapp.schedule.core.worker;
 
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
+import com.liumapp.pattern.schedule.HelloPattern;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,9 +12,17 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class HelloWorker extends StandReadyWorker {
+
     @Override
-    public String doWhatYouShouldDo(String s) {
-        
-        return null;
+    public String doWhatYouShouldDo(String whatQueenSays) {
+        try {
+            HelloPattern helloPattern = HelloPattern.parse(whatQueenSays);
+            
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
 }
