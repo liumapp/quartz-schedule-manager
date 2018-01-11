@@ -60,14 +60,9 @@
       <artifactId>spring-context-support</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.quartz-scheduler</groupId>
-      <artifactId>quartz</artifactId>
-      <version>2.2.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.quartz-scheduler</groupId>
-      <artifactId>quartz-jobs</artifactId>
-      <version>2.2.1</version>
+      <groupId>com.liumapp.schedule.util</groupId>
+      <artifactId>quartz-schedule-manager-util</artifactId>
+      <version>v1.0.0</version>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
